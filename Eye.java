@@ -53,7 +53,7 @@ public class Eye {
         g.fillOval(pupilX - pupilRadius, pupilY - pupilRadius, 2 * pupilRadius, 2 * pupilRadius);
         g.setColor(Color.red);
 
-        g.drawLine(eyeX + 25, eyeY + 25, clickedX, clickedY);
+        g.drawLine(pupilX, pupilY, clickedX, clickedY);
     }
 
 
