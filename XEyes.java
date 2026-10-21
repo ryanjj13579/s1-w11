@@ -9,7 +9,7 @@ import java.awt.event.*;
  * of this class.
  */
 
-public class XEyes extends JPanel implements MouseListener{
+public class XEyes extends JPanel implements MouseListener, MouseMotionListener{
 
 
     private String fileName = "einstein.jpg";
@@ -20,6 +20,8 @@ public class XEyes extends JPanel implements MouseListener{
     // Each eye gets an instance variable.
     private Eye eye_1;
     private Eye eye_2;
+    private int clickedX;
+    private int clickedY;
     
 
     // Constructor: this loads the image "einstein.jpg" in the "images" directory 
@@ -34,7 +36,10 @@ public class XEyes extends JPanel implements MouseListener{
         // these eyes fit right on Einstein's head.  
         eye_1 = new Eye(269, 290, 49, 37);
         eye_2 = new Eye(372, 290, 49, 37);
+        Eye eye_1 = null;
+        Eye eye_2 = null;
         addMouseListener(this);
+        addMouseMotionListener(this);
         myFrame.setVisible(true);
         }
 
@@ -54,9 +59,21 @@ public class XEyes extends JPanel implements MouseListener{
         g.drawImage(myPic.getImage(), 0, 0, this);
         eye_1.draw(g);
         eye_2.draw(g);
+        
     }
     
     // move the pupil when the mouse is clicked
+    public void mouseMoved (MouseEvent event){
+        eye_1.movePupil(event.getX(), event.getY());
+        eye_2.movePupil(event.getX(), event.getY());
+        
+        repaint();
+    }
+
+    public void mouseDragged (MouseEvent e){
+
+    }
+
     public void mouseClicked (MouseEvent event) {
         eye_1.movePupil(event.getX(), event.getY());
         eye_2.movePupil(event.getX(), event.getY());

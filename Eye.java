@@ -8,6 +8,8 @@ public class Eye {
     private int eyeballBorder = 3;
     private int pupilRadius = 10;
     private double horDist, vertDist;
+    private int clickedX;
+    private int clickedY;
 
 
     public Eye(int x, int y, int width, int height) {
@@ -40,16 +42,18 @@ public class Eye {
 
     
     public void draw (Graphics g) {
-        
         g.setColor(Color.black);
         g.fillOval (eyeX, eyeY, eyeWidth, eyeHeight);
-
+        
         g.setColor(Color.white);
         g.fillOval (eyeX + eyeballBorder, eyeY + eyeballBorder, 
                     eyeWidth - (2 * eyeballBorder), eyeHeight - (2 * eyeballBorder));
                     
         g.setColor(Color.black);
         g.fillOval(pupilX - pupilRadius, pupilY - pupilRadius, 2 * pupilRadius, 2 * pupilRadius);
+        g.setColor(Color.red);
+
+        g.drawLine(eyeX + 25, eyeY + 25, clickedX, clickedY);
     }
 
 
@@ -65,6 +69,8 @@ public class Eye {
         // distance from click to eye center
         int deltaX = clickX - eyeCenterX;
         int deltaY = clickY - eyeCenterY;
+        clickedX = clickX;
+        clickedY = clickY;
 
         if (deltaX == 0) {
             //first check if the click was exactly aligned vertically with eye center
