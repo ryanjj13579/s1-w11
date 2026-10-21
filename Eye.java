@@ -42,6 +42,8 @@ public class Eye {
 
     
     public void draw (Graphics g) {
+        Graphics2D g2d = (Graphics2D) g;
+        g2d.setStroke(new BasicStroke(10.0f));
         g.setColor(Color.black);
         g.fillOval (eyeX, eyeY, eyeWidth, eyeHeight);
         
