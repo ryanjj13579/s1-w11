@@ -63,7 +63,15 @@ public class Eye {
     //////
     // MouseListener events
     //////
-    
+    private double square(double number){
+        return number * number;
+    }
+
+    public boolean inEye(int mouseX, int mouseY){
+        double dist = square(mouseX - eyeCenterX) / square(eyeWidth/2.0 - pupilRadius) + 
+                  square(mouseY - eyeCenterY) / square(eyeHeight/2.0 - pupilRadius);
+    return (dist <= 1);
+}
     
     // This sets pupilX and pupilY to the new pupil position, using actual mathematics
     //  learned in high school...
@@ -74,7 +82,11 @@ public class Eye {
         clickedX = clickX;
         clickedY = clickY;
 
-        if (deltaX == 0) {
+        if (inEye(clickX, clickY)){
+            pupilX = clickX;
+            pupilY = clickY;
+        }
+        else if (deltaX == 0) {
             //first check if the click was exactly aligned vertically with eye center
             // why?  In general we need to calculate a slope, and perfect vertical has an infinite
             // slope, which will cause an error.  So, this is a special case.
@@ -85,7 +97,8 @@ public class Eye {
             } else {
                 pupilY = (int) (eyeCenterY + vertDist);
             }
-        } else {
+        } else { 
+            
             // this is for all other clicks.  We use doubles for more precision.
             // remember, slope will be positive if the click was in the upper right or lower left
             // of the eye center, or negative otherwise.
@@ -120,9 +133,12 @@ public class Eye {
     }
     
     
+
+    
+ }
     
 
 
 
 
-}  //end class
+ //end class
